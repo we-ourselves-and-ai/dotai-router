@@ -1,6 +1,6 @@
 {
   "name": "@dacorm/dotai-router",
-  "version": "1.2.8",
+  "version": "1.2.12",
   "description": "Atomic router",
   "private": false,
   "type": "module",

@@ -26,6 +26,12 @@ export const createRouter = (routes: any, history: any): any => {
 
 export function getPagePath(router: any, name: any, params: any) {
     const searchValue = (routes: any, value: any) => {
+        if (value.includes(':')) {
+            const routeParts = value.split(':');
+            const matched = routeParts[0];
+            return `${matched}${params}`
+        }
+
         for (let key in routes) {
             if (key === value) {
                 return routes[key];
@@ -40,14 +46,12 @@ export function getPagePath(router: any, name: any, params: any) {
 
 export function openPage(router: any, name: any, params: any) {
     const path = getPagePath(router, name, params);
-    console.log(path);
-    router.history.pushState(null, '', path)
+    router.history.pushState((params && params) || null, '', path)
     router.set(path)
 }
 
 export function redirectPage(router: any, name: any, params: any) {
     const path = getPagePath(router, name, params);
-    console.log(path);
     router.history.replaceState(null, '', path)
     router.set(path)
 }
